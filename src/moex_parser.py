@@ -1,6 +1,3 @@
-import math
-from datetime import datetime
-
 import pandas as pd
 import requests
 
@@ -73,7 +70,10 @@ def get_trading_data(bond, period_start, period_end):
         "start": 0,
         "numtrades": 1,
         "tradingsession": "3",
-        "history.columns": "TRADEDATE,SHORTNAME,SECID,NUMTRADES,VALUE,LOW,HIGH,CLOSE,LEGALCLOSEPRICE,ACCINT,WAPRICE,YIELDCLOSE,OPEN,VOLUME,MARKETPRICE2,MARKETPRICE3,ADMITTEDQUOTE,MP2VALTRD,MARKETPRICE3TRADESVALUE,ADMITTEDVALUE,MATDATE,DURATION,YIELDATWAP,IRICPICLOSE,BEICLOSE,COUPONPERCENT,COUPONVALUE,FACEVALUE,CURRENCYID",
+        "history.columns": "TRADEDATE,SHORTNAME,SECID,NUMTRADES,VALUE,LOW,HIGH,CLOSE,LEGALCLOSEPRICE,ACCINT,WAPRICE,"
+                           "YIELDCLOSE,OPEN,VOLUME,MARKETPRICE2,MARKETPRICE3,ADMITTEDQUOTE,MP2VALTRD,"
+                           "MARKETPRICE3TRADESVALUE,ADMITTEDVALUE,MATDATE,DURATION,YIELDATWAP,IRICPICLOSE,BEICLOSE,"
+                           "COUPONPERCENT,COUPONVALUE,FACEVALUE,CURRENCYID",
     }
 
     all_data = []
@@ -84,7 +84,7 @@ def get_trading_data(bond, period_start, period_end):
         raw_data = response.json()
 
         # Данные лежат в ['history']['data']
-        rows = raw_data['history']['data']
+        rows = raw_data["history"]["data"]
 
         if not rows:  # Если данных больше нет — выходим
             break
@@ -99,7 +99,7 @@ def get_trading_data(bond, period_start, period_end):
         params["start"] += 100
 
     # Сразу собираем в удобный DataFrame
-    columns = raw_data['history']['columns']
+    columns = raw_data["history"]["columns"]
 
     # Создаем Dataframe
     trading_data_df = pd.DataFrame(all_data, columns=columns)
@@ -107,5 +107,5 @@ def get_trading_data(bond, period_start, period_end):
     return trading_data_df
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     pass

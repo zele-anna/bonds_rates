@@ -10,6 +10,7 @@ python = "^3.13"
 pandas = "^3.0.0"
 requests = "^2.32.5"
 zeep = "^4.3.2"
+openpyxl = "^3.1.5"
 
 
 [tool.poetry.group.lint.dependencies]

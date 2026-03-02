@@ -9,7 +9,8 @@ def get_key_rate(date_from, date_to):
     url = "https://www.cbr.ru/hd_base/KeyRate/"
     params = {"UniDbQuery.Posted": "True", "UniDbQuery.From": date_from, "UniDbQuery.To": date_to}
     headers = {
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                      "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
         "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
         "Referer": "https://www.cbr.ru",
     }
@@ -43,22 +44,16 @@ def get_cbr_zcyc_params(date_from, date_to):
     url = "https://www.cbr.ru/hd_base/zcyc_params/"
 
     # Параметры из вашей ссылки
-    params = {
-        "UniDbQuery.Posted": "True",
-        "UniDbQuery.From": date_from,
-        "UniDbQuery.To": date_to
-    }
+    params = {"UniDbQuery.Posted": "True", "UniDbQuery.From": date_from, "UniDbQuery.To": date_to}
 
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
-    }
+    headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"}
 
     try:
         response = requests.get(url, params=params, headers=headers, timeout=20)
         response.raise_for_status()
 
         # Читаем все таблицы со страницы
-        tables = pd.read_html(io.StringIO(response.text), decimal=',', thousands='\xa0')
+        tables = pd.read_html(io.StringIO(response.text), decimal=",", thousands="\xa0")
 
         if not tables:
             return "Таблицы не найдены"
