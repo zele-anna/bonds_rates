@@ -1,11 +1,10 @@
 import pandas as pd
 
+from calculations import calculate_bond_var
 from cbr_parser import get_cbr_zcyc_params, get_key_rate
-from db_manager import (get_all_data_from_db_table, get_filtered_data_from_db_table, normalize_trading_data_table,
-                        save_data_to_db)
+from db_manager import (get_all_data_from_db_table, get_filtered_data_from_db_table, normalize_bonds_table,
+                        normalize_trading_data_table, save_data_to_db)
 from moex_parser import get_bonds_by_matdate, get_trading_data
-from src.calculations import calculate_bond_var
-from src.db_manager import normalize_bonds_table
 
 
 def get_data():
