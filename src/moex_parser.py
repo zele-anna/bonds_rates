@@ -25,6 +25,10 @@ def get_bonds_by_matdate(start_date: str = "2026-01-01", end_date: str = "2026-1
     df = pd.DataFrame(rows, columns=columns)
     filtered_df = df[df["MATDATE"].between(start_date, end_date)]
 
+    # Фильтруем по валюте расчетов РУБЛИ и режиму торгов Т+
+    filtered_df = filtered_df[filtered_df["CURRENCYID"] == "SUR"]
+    filtered_df = filtered_df[filtered_df["BOARDID"] == "TQCB"]
+
     # Фильтруем только нужные столбцы
     cols_to_keep = [
         "SECID",
@@ -39,6 +43,7 @@ def get_bonds_by_matdate(start_date: str = "2026-01-01", end_date: str = "2026-1
         "FACEUNIT",
         "ISIN",
         "REGNUMBER",
+        "CURRENCYID",
         "COUPONPERCENT",
         "CALLOPTIONDATE",
         "PUTOPTIONDATE",
@@ -71,9 +76,9 @@ def get_trading_data(bond, period_start, period_end):
         "numtrades": 1,
         "tradingsession": "3",
         "history.columns": "TRADEDATE,SHORTNAME,SECID,NUMTRADES,VALUE,LOW,HIGH,CLOSE,LEGALCLOSEPRICE,ACCINT,WAPRICE,"
-                           "YIELDCLOSE,OPEN,VOLUME,MARKETPRICE2,MARKETPRICE3,ADMITTEDQUOTE,MP2VALTRD,"
-                           "MARKETPRICE3TRADESVALUE,ADMITTEDVALUE,MATDATE,DURATION,YIELDATWAP,IRICPICLOSE,BEICLOSE,"
-                           "COUPONPERCENT,COUPONVALUE,FACEVALUE,CURRENCYID",
+        "YIELDCLOSE,OPEN,VOLUME,MARKETPRICE2,MARKETPRICE3,ADMITTEDQUOTE,MP2VALTRD,"
+        "MARKETPRICE3TRADESVALUE,ADMITTEDVALUE,MATDATE,DURATION,YIELDATWAP,IRICPICLOSE,BEICLOSE,"
+        "COUPONPERCENT,COUPONVALUE,FACEVALUE,CURRENCYID",
     }
 
     all_data = []

@@ -10,7 +10,7 @@ def get_key_rate(date_from, date_to):
     params = {"UniDbQuery.Posted": "True", "UniDbQuery.From": date_from, "UniDbQuery.To": date_to}
     headers = {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-                      "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
         "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
         "Referer": "https://www.cbr.ru",
     }
